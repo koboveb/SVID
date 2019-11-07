@@ -26,11 +26,9 @@ const QStringList &GetFieldDialogName() const;//выдача Диалогов п
 const QStringList &GetFieldPath() const;//выдача Путей полей
 
 const QStringList &GetDialogName() const; //выдача Имен диалогов
-/*
-const QList<QStringList> &Get_FieldDialog() const; //выдача полей диалогов
-const QStringList &Get_DialogName() const;// имена диалогов
-const int &Get_DialogCount() const; //количество диалогов
-*/
+
+QList<int> &GetFieldDocumForShow(QString tNameDocum );//выдача полей документов для отображения
+
 
 const QStringList &GetDocumName() const; // имена документов
 const QStringList &GetDocumLevel() const; // уровни документов
@@ -71,7 +69,8 @@ int DataCount;
     QStringList l_vv_FieldName; //Поля. Имя поля
     QList<int> l_vv_FieldWidth; //Поля. Ширина
     QStringList l_vv_FieldDialogName; //Поля. Имя диалога
-    QStringList l_vv_FieldPath; //Поля. Имя диалога
+    QStringList l_vv_FieldDialogCod; //Поля. Код диалога
+    QStringList l_vv_FieldPath; //Поля. Путь документа
 
 //--Диалоги
     QStringList l_vv_DialogName; //Диалоги Имена
@@ -85,7 +84,8 @@ int DataCount;
     QStringList l_vv_DocName; // Документ Имя
     QStringList l_vv_DocLevel; // Документ Уровень
 
-    QList<QStringList> l_vv_DocDialog; // Список кодов Диалогов для документа
+    QList<QStringList> l_vv_DocDialogCod; // Список кодов Диалогов для документа
+    QList<int> lFieldDocum; // Список для отображения полей документов
     //QList<QList<int>> l_vv_DocField; // Список кодов Поля для документов
 
 //--Переменные для данных

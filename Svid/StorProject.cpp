@@ -37,8 +37,9 @@ bool okk;
         QString tWidth = ltField.value(3);
         l_vv_FieldWidth.append(tWidth.toInt(&okk,10));
 
-        l_vv_FieldDialogName.append(ltField.value(4));
-        l_vv_FieldPath.append(ltField.value(5));
+        l_vv_FieldDialogCod.append(ltField.value(4)); // Код диалога
+        l_vv_FieldDialogName.append(ltField.value(5));// Имя диалога
+        l_vv_FieldPath.append(ltField.value(6));      // Путь кэша и документов
 
    }
 
@@ -49,7 +50,7 @@ l_vv_DialogName.append(l_vv_FieldDialogName.value(0));
 for(int i = 1; i < l_vv_FieldDialogName.length(); i++)
 {
 
-    if (l_vv_FieldDialogName.value(i-1) != l_vv_FieldDialogName.value(i))
+    if (l_vv_FieldDialogCod.value(i-1) != l_vv_FieldDialogCod.value(i))
         l_vv_DialogName.append(l_vv_FieldDialogName.value(i));
 
 }
@@ -96,16 +97,26 @@ void StorProject::LoadDocum()
         QStringList l_Field = t1.replace("\n","").split("|");
 
 
-        l_vv_DocName.append(l_Field.value(0));
-        l_vv_DocLevel.append(l_Field.value(1));
+        for (int i = 0; i< l_Field.length(); i++)
 
-            QStringList lt_vv_DocDialog;
-            for (int i = 2; i<l_Field.length(); i++)
-                {
-                    lt_vv_DocDialog.append(l_Field.value(i));
-                }
+        {
+            if (i == 0)
+              l_vv_DocName.append(l_Field.value(i));
 
-            l_vv_DocDialog.append(lt_vv_DocDialog); // Загрузка кодов диаогов в результирующий список
+            if (i == 1)
+               l_vv_DocLevel.append(l_Field.value(i));
+
+            if (i == 2)
+            {
+                QString tv_CodDial = l_Field.value(i);
+                QStringList lt_vv_CodDialog = tv_CodDial.split(".");
+                l_vv_DocDialogCod.append(lt_vv_CodDialog); // Загрузка кодов диаогов в результирующий список
+
+            }
+
+        }
+
+
     }
 }
 
@@ -289,4 +300,47 @@ return l_vv_DocLevel;
 
 }
 
+QList<int> &StorProject::GetFieldDocumForShow(QString tNameDocum )
+{
+  lFieldDocum.clear();
+   QStringList lt_vv_CodDialog;
+
+
+//----Ищем требуемый документ
+
+   for (int i = 0; i<l_vv_DocName.length(); i++)
+
+   {
+       if (l_vv_DocName.value(i) == tNameDocum)
+       {
+           lt_vv_CodDialog = l_vv_DocDialogCod.value(i);
+
+       }
+
+   }
+
+
+//---Сопоставляет отображаемые поля с документом
+
+
+  for (int i = 0; i < l_vv_FieldDialogCod.length(); i++)
+
+   {      
+
+       lFieldDocum.append(0);
+       for (int k = 0; k < lt_vv_CodDialog.length(); k++)
+
+       {
+
+        if(l_vv_FieldDialogCod.value(i) == lt_vv_CodDialog.value(k))
+
+            lFieldDocum.replace(i, 1);
+       }
+
+   }
+
+
+   return lFieldDocum;
+
+}
 

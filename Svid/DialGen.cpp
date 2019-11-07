@@ -603,7 +603,7 @@ void DialGen::SlotKeyReturn()
 
     if (flagNewView == 1 ) //режим нового документа
     {
-/*
+
         TextSearch.clear();
         countSearch = 0;
         //bool ok2;
@@ -622,7 +622,7 @@ void DialGen::SlotKeyReturn()
 
         //Если новая запись, то в кэш
 
-            NewRowsInCash(listTextEdit.at(tCurrentRowInfo)->toPlainText().replace(",", "."));
+           // NewRowsInCash(listTextEdit.at(tCurrentRowInfo)->toPlainText().replace(",", "."));
 
         if(tCurrentRowInfo == 0)
 
@@ -632,8 +632,10 @@ void DialGen::SlotKeyReturn()
             QString ttText = listTextEdit.at(tCurrentRowInfo)->toPlainText();
             QStringList lLev = tStorage->GetDocumLevel();
 
-            //скрываем все строки
+ //           qDebug()<<"lLev "<<lLev;
 
+            //скрываем все строки
+/*
 
             for (int i=0; i<lLev.length();i++)
 
@@ -642,13 +644,13 @@ void DialGen::SlotKeyReturn()
               lListViewCache.at(StakeGenSubCache->currentIndex() + 1)->setRowHidden(i,1);
 
             }
-
+*/
             //--------------------
 
 
            QStringList lttText = ttText.split(".");
 
-
+/*
 
            if (ttText != "")
            {
@@ -669,7 +671,7 @@ void DialGen::SlotKeyReturn()
 
            }
 
-
+*/
 
 
 
@@ -680,35 +682,24 @@ void DialGen::SlotKeyReturn()
 
         {
 
-             lfShow = ModelProj->GetFieldForShowDocum(listTextEdit.at(tCurrentRowInfo)->toPlainText());
+             lfShow = tStorage->GetFieldDocumForShow(listTextEdit.at(tCurrentRowInfo)->toPlainText());
 
 
-             //скрытие всех полей
 
-
-             for(int k=2;k<TableViewInfo->model()->rowCount(QModelIndex());k++)
+             for(int k=2; k<lfShow.length(); k++)
               {
-                 TableViewInfo->setRowHidden(k,true);
+                 if (lfShow.value(k) == 0) // если 0, то скрываем 1 показываем
+                    TableViewInfo->setRowHidden(k,true);
+                 else
+                    TableViewInfo->setRowHidden(k, false);
               }
 
-
-             //отображение тебуемых полей
-
-             for(int k=0;k<lfShow.length();k++)
-              {
-                 TableViewInfo->setRowHidden(lfShow.value(k), false);
-
-              }
 
         }
 
 
-       while (tCurrentRowInfo + 1 < ModelProj->GetFileds().length())
+       while (tCurrentRowInfo + 1 < tStorage->GetFieldCod().length())
                     {
-
-
-
-
 
                         tCurrentRowInfo = tCurrentRowInfo + 1;
                         if ( !TableViewInfo->isRowHidden(tCurrentRowInfo))
@@ -735,7 +726,7 @@ void DialGen::SlotKeyReturn()
                         }
 
                     }
-*/
+
    }
 
 
