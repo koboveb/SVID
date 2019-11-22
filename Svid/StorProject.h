@@ -34,6 +34,7 @@ QList<int> &GetFieldDocumForShow(QString tNameDocum );//выдача полей 
 
 const QStringList &GetDocumName() const; // имена документов
 const QStringList &GetDocumLevel() const; // уровни документов
+const QStringList &GetDocumNameLevel() const; // выдача документов от уровня
 
 const int &Get_DataCount() const; //количество записей в данных
 const QList<QStringList> &Get_FieldData() const; //основные данные
@@ -46,7 +47,7 @@ const QList<QStringList> &GetFieldInfo() const; // данные для инфо
 //---------Set Установка
 
 void SetFieldInfo (int i, QString tVal); // установка значений в инфо
-
+void SetDocumNameLevel(QString tDocum); // установка уровня для имен документов
 
 
 private:
@@ -87,6 +88,8 @@ int DataCount;
 
     QStringList l_vv_DocName; // Документ Имя
     QStringList l_vv_DocLevel; // Документ Уровень
+
+    QStringList lDocumLevel; // Документы от уровня
 
     QList<QStringList> l_vv_DocDialogCod; // Список кодов Диалогов для документа
     QList<int> lFieldDocum; // Список для отображения полей документов

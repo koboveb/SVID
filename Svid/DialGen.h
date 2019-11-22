@@ -40,13 +40,14 @@ private:
 
     ModelUni *ModelProj;
     ModelUni *ModelData;
+    ModelUni *ModelDocum;
 
-    ModelUni *ModelDoc0;
-    ModelUni *ModelDoc1;
-    ModelUni *ModelDoc2;
-    ModelUni *ModelDoc3;
+   // ModelUni *ModelDoc0;
+  //  ModelUni *ModelDoc1;
+  //  ModelUni *ModelDoc2;
+  //  ModelUni *ModelDoc3;
 
-    ModelUni *ModelKeyDoc;
+  //  ModelUni *ModelKeyDoc;
 
     QStackedWidget *StakeGenSub;
     QStackedWidget *StakeGenSubTab;

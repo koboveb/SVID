@@ -127,6 +127,7 @@ void StorProject::LoadDocum()
 
 
     }
+
 }
 
 //-----------------Загрузка данных
@@ -300,10 +301,44 @@ void StorProject::SetFieldInfo (int i, QString tVal)
 
 }
 
+
+void StorProject::SetDocumNameLevel(QString tDocum)
+{
+
+    lDocumLevel.clear();
+
+    if (tDocum == "")
+    {
+         for (int i=0; i<l_vv_DocLevel.length(); i++)
+        {
+            if (l_vv_DocLevel.at(i) == "0")
+                lDocumLevel.append(l_vv_DocName.at(i));
+         }
+    }
+    else
+    {
+        int tcNom = tDocum.count('.');
+
+        for (int i=0; i<l_vv_DocLevel.length(); i++)
+        {
+            QString ttcNom =  QString::number(tcNom + 1);
+
+            if (l_vv_DocLevel.at(i) == ttcNom)
+                lDocumLevel.append(l_vv_DocName.at(i));
+        }
+
+    }
+
+    //qDebug()<<"lDocumLevel "<<lDocumLevel;
+
+}
+
+
 const QStringList &StorProject::GetDocumName() const
 {
 
 return l_vv_DocName;
+
 
 }
 
@@ -311,9 +346,20 @@ return l_vv_DocName;
 const QStringList &StorProject::GetDocumLevel() const
 {
 
-return l_vv_DocLevel;
+    return l_vv_DocLevel;
 
 }
+
+
+const QStringList &StorProject::GetDocumNameLevel() const
+{
+
+   // qDebug()<<"lDocumLevel "<<lDocumLevel;
+
+    return lDocumLevel;
+
+}
+
 
 QList<int> &StorProject::GetFieldDocumForShow(QString tNameDocum )
 {

@@ -18,13 +18,10 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
 
              ModelProj = new ModelUni(PROJECT, tStorage);
              ModelData = new ModelUni(DATA, tStorage);
+            // ModelDocum = new ModelUni(DOCUM, tStorage);
 
-             ModelDoc0 = new ModelUni(DOCUM, tStorage);
-             ModelDoc1 = new ModelUni(DOCUM, tStorage);
-             ModelDoc2 = new ModelUni(DOCUM, tStorage);
-             ModelDoc3 = new ModelUni(DOCUM, tStorage);
 
-             ModelKeyDoc = new ModelUni(DOCKEY, tStorage);
+           //  ModelKeyDoc = new ModelUni(DOCKEY, tStorage);
 
 
 //устанавливаем размер массива
@@ -40,31 +37,38 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
                listTextEdit.append(tTextEdit);
 
 
-               //-----------------------------------------------------------
-               ModelUni *ModelCache = new ModelUni(CACHE, tStorage);
+               if (i== 1)
+
+               {
+
+                   ModelUni *ModelDocum = new ModelUni(DOCUM, tStorage);
+                   QListView *tListCache = new QListView(); // Представление в виде списка
+
+                   tListCache->setModel(ModelDocum);
+
+                   lModelCach << ModelDocum;
+                   lListViewCache << tListCache;
+
+               }
+
+
+               else
+               {
+                 ModelUni *ModelCache = new ModelUni(CACHE, tStorage);
+                 QListView *tListCache = new QListView(); // Представление в виде списка
+
+                 tListCache->setModel(ModelCache);
+
+
+                 lModelCach << ModelCache;
+                 lListViewCache << tListCache;
+               }
+
+//-----------------------------------------------------------
+
 
 
               // QListView *tListCacheKey = new QListView(); // Представление в виде списка для кэша ключей
-              QListView *tListCache = new QListView(); // Представление в виде списка
-
-
-               lModelCach << ModelCache;
-
-
-
-               if(i == 0)
-                {
-                   //tListCash->setModel(ModelDoc);
-                   //tListCache->setModel(ModelDoc0);
-                  tListCache->setModel(ModelKeyDoc);
-                  // lListViewCache << tListCache;
-                }
-
-               else
-                {
-                    tListCache->setModel(ModelCache);
-                    lListViewCache << tListCache;
-                }
 
 
             //устанавливаем массив битов для отследивания изменений данных
@@ -152,30 +156,34 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
 
                QString tType = tStorage->Get_FieldDialog().value(i).value(3);
 
-
-              if (tType == "Gen")
+*/
+              if (tStorage->GetFieldType().value(i) == "Gen")
               {
 
-                 // ModelKeyDoc->SetDocKey("25");
-              QListView *tListCacheKeyDoc = new QListView(); // Представление для списка структурных номеров
-              tListCacheKeyDoc->setModel(ModelKeyDoc);
-              StakeGenSubCashSub->addWidget(tListCacheKeyDoc);
+               // ModelKeyDoc->SetDocKey("25");
+               // QListView *tListCacheKeyDoc = new QListView(); // Представление для списка структурных номеров
+               // tListCacheKeyDoc->setModel(ModelKeyDoc);
+                StakeGenSubCashSub->addWidget(lListViewCache.at(i));
+
 
               }
 
-               if (tType == "Doc")
+
+               if (tStorage->GetFieldType().value(i) == "Doc")
                  StakeGenSubCashSub->addWidget(lListViewCache.at(i));
 
-               if (tType == "Cal")
-                   StakeGenSubCashSub->addWidget(CalendarGenSubCash);
-
-               if (tType == "Txt")
+               if (tStorage->GetFieldType().value(i) == "Txt")
                   StakeGenSubCashSub->addWidget(lListViewCache.at(i));
 
-               if (tType == "Num")
+
+/*
+               if (tStorage->GetFieldType().value(i) == "Cal")
+                   StakeGenSubCashSub->addWidget(CalendarGenSubCash);
+
+               if (tStorage->GetFieldType().value(i) == "Num")
                    StakeGenSubCashSub->addWidget(tTextTemp);
 
-               if (tType == "Blk")
+               if (tStorage->GetFieldType().value(i) == "Blk")
                    StakeGenSubCashSub->addWidget(tTextTemp);
 
 */
@@ -630,13 +638,16 @@ void DialGen::SlotKeyReturn()
             //Зависимость документа от уровня
 
             QString ttText = listTextEdit.at(tCurrentRowInfo)->toPlainText();
-            QStringList lLev = tStorage->GetDocumLevel();
+            tStorage->SetDocumNameLevel(ttText);
+            lListViewCache.value(1)->update(QModelIndex());
 
- //           qDebug()<<"lLev "<<lLev;
+            //QStringList lLev = tStorage->GetDocumLevel();
+
+            //qDebug()<<"lLev "<<lLev;
 
             //скрываем все строки
-/*
 
+/*
             for (int i=0; i<lLev.length();i++)
 
             {
@@ -648,7 +659,7 @@ void DialGen::SlotKeyReturn()
             //--------------------
 
 
-           QStringList lttText = ttText.split(".");
+           //QStringList lttText = ttText.split(".");
 
 /*
 

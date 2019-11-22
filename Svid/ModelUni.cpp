@@ -144,6 +144,12 @@ int ModelUni::rowCount(const QModelIndex &parent) const
                 return StorProj->Get_DataCount();
             }
                 break;
+    case DOCUM:
+        {
+            (void) parent;
+            return StorProj->GetDocumNameLevel().length();
+        }
+            break;
 
         default:
             {
@@ -194,7 +200,7 @@ QVariant ModelUni::data(const QModelIndex &index, int role) const
         if (role == Qt::DisplayRole)
          {
 
-            QString unswer = StorProj->GetDocumName().value(index.row());
+            QString unswer = StorProj->GetDocumNameLevel().value(index.row());
 
 
             return unswer;
@@ -267,70 +273,6 @@ QVariant ModelUni::data(const QModelIndex &index, int role) const
 
 }
 
-/*
-bool ModelUni::setData(const QModelIndex &index, const QVariant &value, int role)
- {
-
-
-    switch (TypeModelL)
-    {
-    case PROJECT:
-
-    {
-
-
-        if (index.isValid() && role == Qt::EditRole)
-        {
-
-           StorProj->SetFieldInfo(index.row(), value.toString());
-           emit dataChanged(index, index);
-            return true;
-        }
-        return false;
-
-    }
-    break;
-
-    case CACHE:
-
-    {
-
-        if (index.isValid() && role == Qt::EditRole)
-        {
-
-
-            QStringList lValue;
-
-            lValue << value.toString();
-            StCch.SetRow(index.row(), lValue);
-
-           emit dataChanged(index, index);
-            return true;
-        }
-        return false;
-    }
-
-        break;
-
-    case DOCUM:
-
-    {
-
-
-    }
-
-         break;
-
-    default:
-
-        break;
-    }
-
-    return false;
-
- }
-
-*/
 
 QVariant ModelUni::headerData(int section, Qt::Orientation orientation, int role) const
 {
@@ -405,9 +347,6 @@ QVariant ModelUni::headerData(int section, Qt::Orientation orientation, int role
                          case 0:
                              return tr("N doc");
 
-                         case 1:
-                             return tr("N text");
-
                          default:
                              return QVariant();
                      }
@@ -444,7 +383,7 @@ QVariant ModelUni::headerData(int section, Qt::Orientation orientation, int role
 
 
 
-
+/*
     case DOCKEY:
 
     {
@@ -471,7 +410,7 @@ QVariant ModelUni::headerData(int section, Qt::Orientation orientation, int role
 
         break;
 
-
+*/
 
 
 
