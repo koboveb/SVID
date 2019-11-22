@@ -640,52 +640,6 @@ void DialGen::SlotKeyReturn()
             QString ttText = listTextEdit.at(tCurrentRowInfo)->toPlainText();
             tStorage->SetDocumNameLevel(ttText);
             lListViewCache.value(1)->update(QModelIndex());
-
-            //QStringList lLev = tStorage->GetDocumLevel();
-
-            //qDebug()<<"lLev "<<lLev;
-
-            //скрываем все строки
-
-/*
-            for (int i=0; i<lLev.length();i++)
-
-            {
-
-              lListViewCache.at(StakeGenSubCache->currentIndex() + 1)->setRowHidden(i,1);
-
-            }
-*/
-            //--------------------
-
-
-           //QStringList lttText = ttText.split(".");
-
-/*
-
-           if (ttText != "")
-           {
-
-               //qDebug()<<"lttText "<< lttText.length();
-               if (lttText.length() == 2 )
-
-                  lListViewCache.value(1)->setModel(ModelDoc3);
-
-               else if(lttText.length() == 1)
-
-                   lListViewCache.value(1)->setModel(ModelDoc2);
-            }
-           else
-           {
-
-                    lListViewCache.value(1)->setModel(ModelDoc1);
-
-           }
-
-*/
-
-
-
         }
 
 
