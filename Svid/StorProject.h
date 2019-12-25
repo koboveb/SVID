@@ -16,6 +16,8 @@ public:
 void LoadDocum();
 void LoadData (int CurrentRow);
 void LoadDataCount();
+void LoadDataCachCount();
+void LoadDataCach();
 
 //-------Get Выдача
 const QStringList &GetFieldCod() const;//выдача Кодов полей
@@ -28,27 +30,28 @@ const QStringList &GetFieldPath() const;//выдача Путей полей
 const QStringList &GetDialogName() const; //выдача Имен диалогов
 const QStringList &GetDialogCodName() const; //выдача Код.Имя диалогов
 
-
 QList<int> &GetFieldDocumForShow(QString tNameDocum );//выдача полей документов для отображения
-
 
 const QStringList &GetDocumName() const; // имена документов
 const QStringList &GetDocumLevel() const; // уровни документов
 const QStringList &GetDocumNameLevel() const; // выдача документов от уровня
 
 const int &Get_DataCount() const; //количество записей в данных
+const int &Get_DataCountCach() const; //количество записей в кэше
+
 const QList<QStringList> &Get_FieldData() const; //основные данные
 const QList <int>  &Get_MinMax() const; //интервал подгрузки
 const int  &Get_PageSize() const; //размер страницы
 
 const QList<QStringList> &GetFieldInfo() const; // данные для инфо
 
+const QStringList &Get_DataCach() const; //данные кэша
 
 //---------Set Установка
 
 void SetFieldInfo (int i, QString tVal); // установка значений в инфо
 void SetDocumNameLevel(QString tDocum); // установка уровня для имен документов
-
+void SetCachCurrentCount(int i); // установка текущего количества кэша
 
 private:
 
@@ -63,7 +66,14 @@ QString path;
 
 //--количество записей данных
 int DataCount;
+//--количество записей данных кэша
+QList<int> lDataCachCount;
 
+//--количество в текущем кэше
+int CachCurrentCount = 0;
+
+//--данные в текущем кэше
+QStringList CachCurrentData;
 
 //--Поля
 
@@ -104,6 +114,9 @@ int DataCount;
 
 //--Cписок для инфо
 QList<QStringList> l_vv_FielInfo;
+
+//--Переменные для кэша
+QList<QStringList> l_vv_Cache; //список полей
 
 
 

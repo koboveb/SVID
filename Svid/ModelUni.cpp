@@ -6,57 +6,6 @@ ModelUni::ModelUni(typemodel TypeModel, StorProject *StPr)
     TypeModelL = TypeModel;
     StorProj = StPr;
 
- /*
-    if (StorProj == NULL)
- StorProj = new StorProject;
-*/
-    switch (TypeModelL)
-    {
-    case PROJECT:
-
-    {
-    }
-
-        break;
-
-    case CACHE:
-    {
-
-        //StCch.Load(i);
-
-    }
-        break;
-
-
-    case DOCUM:
-    {
-
-
-    }
-         break;   
-
-
-
-    case DATA:
-    {
-    }
-         break;
-
-
-/*
-    case DOCKEY:
-    {
-    }
-         break;
-
-*/
-
-
-    default:
-
-        break;
-    }
-
 }
 
 
@@ -97,15 +46,6 @@ int ModelUni::columnCount(const QModelIndex &parent) const
     }
     break;
 
-/*
-    case DOCKEY:
-    {
-
-      (void) parent;
-       return 2;
-    }
-    break;
-*/
     default:
     {
         (void) parent;
@@ -130,14 +70,14 @@ int ModelUni::rowCount(const QModelIndex &parent) const
                 return StorProj->GetFieldCod().length();
             }
                 break;
-/*
+
         case CACHE:
             {
                 (void) parent;
-                //return StCch.GetDialogsCount();
+                return StorProj->Get_DataCountCach();
             }
                 break;
-*/
+
         case DATA:
             {
                 (void) parent;
@@ -185,10 +125,12 @@ QVariant ModelUni::data(const QModelIndex &index, int role) const
     {
        if (role == Qt::DisplayRole)
         {
-/*
-           QString unswer = StCch.GetFields().value(index.row()).value(index.column());
+
+           //QString unswer = StCch.GetFields().value(index.row()).value(index.column());
+           QString unswer = StorProj->Get_DataCach().value(index.row());
+           qDebug()<<"Unswer "<<unswer;
            return unswer;
-           */
+
         }
         return QVariant();
     }
@@ -235,31 +177,9 @@ QVariant ModelUni::data(const QModelIndex &index, int role) const
 
     }
 
-         break;
+        break;
 
 
-
-
-
-/*
-    case DOCKEY:
-    {
-
-
-        if (role == Qt::DisplayRole)
-         {
-
-            QString unswer = StDat.getlValsKeyKey().value(index.row()).value(index.column());
-
-            return unswer;
-         }
-         return QVariant();
-
-    }
-
-         break;
-
-*/
     default:
 
         break;
@@ -315,8 +235,11 @@ QVariant ModelUni::headerData(int section, Qt::Orientation orientation, int role
 
         if (orientation == Qt::Horizontal)
         {
+
+ // Разобраться!!!
+
             switch (section)
-            {
+                {
                          case 0:
                              return tr("N doc");
 
@@ -325,7 +248,9 @@ QVariant ModelUni::headerData(int section, Qt::Orientation orientation, int role
 
                          default:
                              return QVariant();
-                     }
+                }
+
+
         }
         return QVariant();
 

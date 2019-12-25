@@ -54,8 +54,13 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
 
                else
                {
+                 tStorage->SetCachCurrentCount(i);
+
+
                  ModelUni *ModelCache = new ModelUni(CACHE, tStorage);
                  QListView *tListCache = new QListView(); // Представление в виде списка
+
+
 
                  tListCache->setModel(ModelCache);
 
