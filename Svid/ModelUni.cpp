@@ -26,6 +26,7 @@ int ModelUni::columnCount(const QModelIndex &parent) const
 
     case CACHE:
     {
+
         (void) parent;
         return 1;
      }
@@ -73,6 +74,8 @@ int ModelUni::rowCount(const QModelIndex &parent) const
 
         case CACHE:
             {
+
+        //qDebug()<<"rowCount "<< StorProj->Get_DataCountCach();
                 (void) parent;
                 return StorProj->Get_DataCountCach();
             }
@@ -128,7 +131,7 @@ QVariant ModelUni::data(const QModelIndex &index, int role) const
 
            //QString unswer = StCch.GetFields().value(index.row()).value(index.column());
            QString unswer = StorProj->Get_DataCach().value(index.row());
-           qDebug()<<"Unswer "<<unswer;
+          // qDebug()<<"Unswer123 "<<unswer;
            return unswer;
 
         }
@@ -144,9 +147,11 @@ QVariant ModelUni::data(const QModelIndex &index, int role) const
 
             QString unswer = StorProj->GetDocumNameLevel().value(index.row());
 
-
+//qDebug()<<"UnswerDOCUM "<<unswer;
             return unswer;
          }
+
+
          return QVariant();
 
 

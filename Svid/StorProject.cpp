@@ -179,48 +179,48 @@ void StorProject::LoadDataCach()
 {
     l_vv_Cache.clear();
 //------Открытие файла кэша
-    for (int i=2; i<l_vv_FieldPath.length(); i++)
+    for (int i=0; i<l_vv_FieldPath.length(); i++)
 
     {
-        if (l_vv_FieldPath.value(i) != "")
-        {
-            QFile* f_Doc;
-             f_Doc = new  QFile(QString::fromLocal8Bit("%1").arg(l_vv_FieldPath.value(i)));
-             f_Doc->open(QIODevice::ReadOnly|QIODevice::Text);
+        if (l_vv_FieldPath.value(i) != "" && i>1)
+               {
+                    QFile* f_Doc;
+                    f_Doc = new  QFile(QString::fromLocal8Bit("%1").arg(l_vv_FieldPath.value(i)));
+                    f_Doc->open(QIODevice::ReadOnly|QIODevice::Text);
 
-             QStringList lT;
+                    QStringList lT;
 
-             while (!f_Doc->atEnd())
+                        while (!f_Doc->atEnd())
 
-                {
-                   QString t1 = f_Doc->readLine();
-                   QString row = t1.replace("\n","");
-                   lT.append(row);
-                  // qDebug()<<"row "<<row;
-                  // l_vv_Cache.value(i).append(t1);
-                }
+                            {
+                                QString t1 = f_Doc->readLine();
+                                QString row = t1.replace("\n","");
+                                lT.append(row);
 
-            // qDebug()<<"lT.length "<<lT.length();
-             l_vv_Cache.append(lT);
+                            }
+
+
+                               l_vv_Cache.append(lT);
+
               f_Doc->close();
 
-       }
+
+            }
         else
         {
-           l_vv_Cache.value(i).append("");
+            QStringList lT;
+            lT.append("");
+
+           l_vv_Cache.append(lT);
         }
 
-
-       //qDebug()<<"l_vv_FieldPath "<<l_vv_FieldPath.value(i);
-
-        QStringList lT = l_vv_Cache.value(i);
-       qDebug()<<i<<"l_vv_Cache "<<lT.length();
+       // qDebug()<<"l_vv_Cache "<<l_vv_Cache.at(i).length();
+        //qDebug()<<"l_vv_Cache "<<l_vv_Cache;
 
 
     }
 
-
-
+//qDebug()<<"l_vv_Cache "<<l_vv_Cache;
 
 }
 
@@ -257,10 +257,10 @@ void StorProject::LoadDataCachCount()
 //------Открытие файла Кэша
 
 
- for (int i = 2; i<l_vv_FieldPath.length();i++)
+ for (int i = 0; i<l_vv_FieldPath.length();i++)
  {
 
-     if (l_vv_FieldPath.value(i) != "")
+     if (l_vv_FieldPath.value(i) != "" && i>1)
     {
         QFile* f_Cach;
         f_Cach = new  QFile(QString::fromLocal8Bit("%1").arg(l_vv_FieldPath.value(i)));
@@ -349,7 +349,7 @@ const int &StorProject::Get_DataCount() const
 const int &StorProject::Get_DataCountCach() const
 {
 
-//    qDebug()<<lDataCachCount;
+ //qDebug()<<"CachCurrentCount "<<CachCurrentCount;
 
     return CachCurrentCount;
 
@@ -359,6 +359,8 @@ const int &StorProject::Get_DataCountCach() const
 
 const QStringList &StorProject::Get_DataCach() const
 {
+   //qDebug()<<"CachCurrentData "<<CachCurrentData;
+
     return CachCurrentData;
 }
 
@@ -438,10 +440,15 @@ void StorProject::SetDocumNameLevel(QString tDocum)
 // установка текущего количества кэш
 void StorProject::SetCachCurrentCount(int i)
 {
- CachCurrentCount = lDataCachCount.value(i);
 
+ qDebug()<<"i "<<i;
+ CachCurrentCount = lDataCachCount.value(i);
  CachCurrentData = l_vv_Cache.value(i);
 
+ //qDebug()<<"CachCurrentData "<<CachCurrentData;
+
+   qDebug()<<"lDataCachCount "<<lDataCachCount;
+   qDebug()<<"l_vv_Cache "<<l_vv_Cache;
 }
 
 

@@ -37,6 +37,7 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
                listTextEdit.append(tTextEdit);
 
 
+
                if (i== 1)
 
                {
@@ -54,13 +55,17 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
 
                else
                {
-                 tStorage->SetCachCurrentCount(i);
 
+                //tStorage->SetCachCurrentCount(i);
+                 //qDebug()<<"ii="<<i;
 
                  ModelUni *ModelCache = new ModelUni(CACHE, tStorage);
                  QListView *tListCache = new QListView(); // Представление в виде списка
 
 
+
+                // QModelIndex tttt = ModelCache->index(1,0, QModelIndex());
+                // qDebug()<<"data "<< ModelCache->data(tttt, Qt::DisplayRole).toString();
 
                  tListCache->setModel(ModelCache);
 
@@ -178,7 +183,13 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
                  StakeGenSubCashSub->addWidget(lListViewCache.at(i));
 
                if (tStorage->GetFieldType().value(i) == "Txt")
+               {
+                  // qDebug()<<"TXT"<<i;
                   StakeGenSubCashSub->addWidget(lListViewCache.at(i));
+
+
+
+               }
 
 
 /*
@@ -426,7 +437,7 @@ void DialGen::SlotCurrentChangedInfo(const QItemSelection & selected)
 {
 
 
-    QModelIndexList indexest = selected.indexes();
+   QModelIndexList indexest = selected.indexes();
 
     tCurrentRowInfo = indexest.value(0).row();
     QModelIndex  tGenIndexL = ModelProj->index(tCurrentRowInfo, 0, QModelIndex());
@@ -438,7 +449,7 @@ void DialGen::SlotCurrentChangedInfo(const QItemSelection & selected)
    StakeGenSub->update();
 
    //StakeGenSubCash->setCurrentWidget(tCurrentRowInfo);
-    //StakeGenSubCash-> update();
+   //StakeGenSubCash-> update();
 
 
        if(tCurrentRowInfo >= 0)
@@ -612,8 +623,6 @@ void DialGen::SlotKeyMyLeft()
 void DialGen::SlotKeyReturn()
 {
 
-
-
     if (flagNewView == 1 ) //режим нового документа
     {
 
@@ -676,7 +685,7 @@ void DialGen::SlotKeyReturn()
 
                         {
 
-                            // Доделать Вывод типа поля
+                             // Доделать Вывод типа поля
 
                              // qDebug()<<tCurrentRowInfo  <<" " << ModelProj->GetField_Type(tCurrentRowInfo);
 
@@ -927,15 +936,22 @@ if (flagNewView == 1 )
 void DialGen::SlotKeyDown()
 {
 
+    tStorage->SetCachCurrentCount(tCurrentRowInfo);
+    lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
+
 if (flagNewView == 1 )
 
 {
 
     flagChangeSlot = true;
+
+//Определяет выделение строки
     QModelIndex  tMIndexCurrent =  lListViewCache.at(tCurrentRowInfo)->selectionModel()->currentIndex();
 
     int ddd = tMIndexCurrent.row();
 
+//qDebug()<<"ddd="<<ddd;
+//qDebug()<<"tCurrentRowInfo="<<tCurrentRowInfo;
 
 
     if (ddd < 0)
