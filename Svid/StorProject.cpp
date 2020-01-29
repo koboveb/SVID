@@ -438,17 +438,19 @@ void StorProject::SetDocumNameLevel(QString tDocum)
 }
 
 // установка текущего количества кэш
-void StorProject::SetCachCurrentCount(int i)
+void StorProject::SetCachCurrentCountData(int i)
 {
 
- qDebug()<<"i "<<i;
+
  CachCurrentCount = lDataCachCount.value(i);
  CachCurrentData = l_vv_Cache.value(i);
 
+ qDebug()<<"i "<<i;
+ qDebug()<<"l_vv_Cache.value "<<l_vv_Cache.value(i);
  //qDebug()<<"CachCurrentData "<<CachCurrentData;
 
-   qDebug()<<"lDataCachCount "<<lDataCachCount;
-   qDebug()<<"l_vv_Cache "<<l_vv_Cache;
+   //qDebug()<<"lDataCachCount "<<lDataCachCount;
+   //qDebug()<<"l_vv_Cache "<<l_vv_Cache;
 }
 
 

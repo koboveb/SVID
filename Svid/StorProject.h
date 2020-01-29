@@ -51,7 +51,7 @@ const QStringList &Get_DataCach() const; //данные кэша
 
 void SetFieldInfo (int i, QString tVal); // установка значений в инфо
 void SetDocumNameLevel(QString tDocum); // установка уровня для имен документов
-void SetCachCurrentCount(int i); // установка текущего количества кэша
+void SetCachCurrentCountData(int i); // установка текущего количества кэша
 
 private:
 

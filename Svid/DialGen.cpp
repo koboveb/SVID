@@ -139,6 +139,8 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
 
 
             //Добавление массива текстовых полей и списка кэша в stake
+
+
              for (int i = 0; i < tStorage->GetFieldCod().length(); i++)
             {
 
@@ -146,63 +148,73 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
 
                QStackedWidget *StakeGenSubCashSub = new QStackedWidget;
 
+
+               StakeGenSubCashSub->addWidget(lListViewCache.at(i));
                StakeGenSubCache->addWidget(StakeGenSubCashSub);
 
 
+             //------Temp
 
-// Временно! Исправить!!
-/*
-               // Временный виджет для текста. Использую вместо числа. Для перспективы
-                  QTextEdit *tTextTemp = new QTextEdit(parent);
+              // QModelIndex  ttt =   ModelData->index(1, 0, QModelIndex());
+               //qDebug()<<"Temp "<<lListViewCache.at(i)->model()->data(ttt).toString();
 
-               // Временный виджет для календаря.
-                  QCalendarWidget *CalendarGenSubCash = new QCalendarWidget;
+             //--------
 
 
+                                                                        // Временно! Исправить!!
+                                                                        /*
+                                                                                       // Временный виджет для текста. Использую вместо числа. Для перспективы
+                                                                                          QTextEdit *tTextTemp = new QTextEdit(parent);
 
-             // qDebug()<<"Type "<<ModelProj->GetField_Type(i);
-
-             // QString tTypeField = ModelProj->GetField_Type(i);
-
-               QString tType = tStorage->Get_FieldDialog().value(i).value(3);
-
-*/
-              if (tStorage->GetFieldType().value(i) == "Gen")
-              {
-
-               // ModelKeyDoc->SetDocKey("25");
-               // QListView *tListCacheKeyDoc = new QListView(); // Представление для списка структурных номеров
-               // tListCacheKeyDoc->setModel(ModelKeyDoc);
-                StakeGenSubCashSub->addWidget(lListViewCache.at(i));
-
-
-              }
-
-
-               if (tStorage->GetFieldType().value(i) == "Doc")
-                 StakeGenSubCashSub->addWidget(lListViewCache.at(i));
-
-               if (tStorage->GetFieldType().value(i) == "Txt")
-               {
-                  // qDebug()<<"TXT"<<i;
-                  StakeGenSubCashSub->addWidget(lListViewCache.at(i));
+                                                                                       // Временный виджет для календаря.
+                                                                                          QCalendarWidget *CalendarGenSubCash = new QCalendarWidget;
 
 
 
-               }
+                                                                                     // qDebug()<<"Type "<<ModelProj->GetField_Type(i);
+
+                                                                                     // QString tTypeField = ModelProj->GetField_Type(i);
+
+                                                                                       QString tType = tStorage->Get_FieldDialog().value(i).value(3);
 
 
-/*
-               if (tStorage->GetFieldType().value(i) == "Cal")
-                   StakeGenSubCashSub->addWidget(CalendarGenSubCash);
+                                                                                      if (tStorage->GetFieldType().value(i) == "Gen")
+                                                                                      {
 
-               if (tStorage->GetFieldType().value(i) == "Num")
-                   StakeGenSubCashSub->addWidget(tTextTemp);
+                                                                                       // ModelKeyDoc->SetDocKey("25");
+                                                                                       // QListView *tListCacheKeyDoc = new QListView(); // Представление для списка структурных номеров
+                                                                                       // tListCacheKeyDoc->setModel(ModelKeyDoc);
+                                                                                        StakeGenSubCashSub->addWidget(lListViewCache.at(i));
 
-               if (tStorage->GetFieldType().value(i) == "Blk")
-                   StakeGenSubCashSub->addWidget(tTextTemp);
 
-*/
+                                                                                      }
+
+
+                                                                                       if (tStorage->GetFieldType().value(i) == "Doc")
+                                                                                         StakeGenSubCashSub->addWidget(lListViewCache.at(i));
+
+
+                                                                                       if (tStorage->GetFieldType().value(i) == "Txt")
+                                                                                       {
+                                                                                          // qDebug()<<"TXT"<<i;
+                                                                                          StakeGenSubCashSub->addWidget(lListViewCache.at(i));
+
+
+
+                                                                                       }
+
+
+
+                                                                                       if (tStorage->GetFieldType().value(i) == "Cal")
+                                                                                           StakeGenSubCashSub->addWidget(CalendarGenSubCash);
+
+                                                                                       if (tStorage->GetFieldType().value(i) == "Num")
+                                                                                           StakeGenSubCashSub->addWidget(tTextTemp);
+
+                                                                                       if (tStorage->GetFieldType().value(i) == "Blk")
+                                                                                           StakeGenSubCashSub->addWidget(tTextTemp);
+
+                                                                        */
 
             }
 
@@ -444,9 +456,15 @@ void DialGen::SlotCurrentChangedInfo(const QItemSelection & selected)
 
     SelecInfo->setCurrentIndex(tGenIndexL, QItemSelectionModel::Select);
 
+
    StakeForText->setCurrentIndex(tCurrentRowInfo);
+
    StakeGenSubCache->setCurrentIndex(tCurrentRowInfo);
+   //qDebug()<<"StakeGenSubCache "<<StakeGenSubCache->count();
+   //qDebug()<<"tCurrentRowInfo 1 "<< tCurrentRowInfo;
+
    StakeGenSub->update();
+
 
    //StakeGenSubCash->setCurrentWidget(tCurrentRowInfo);
    //StakeGenSubCash-> update();
@@ -457,6 +475,9 @@ void DialGen::SlotCurrentChangedInfo(const QItemSelection & selected)
    listTextEdit.at(tCurrentRowInfo)->setFocus();
    listTextEdit.at(tCurrentRowInfo)->selectAll();
     }
+
+
+       //qDebug()<<"SlotCurrentChangedInfo"<< tCurrentRowInfo;
 
 }
 
@@ -674,6 +695,18 @@ void DialGen::SlotKeyReturn()
               }
 
 
+             // Времено Удалить
+             /*
+             for(int k=2; k<lfShow.length(); k++)
+             {
+
+                 TableViewInfo->setRowHidden(k,false);
+
+             }
+             */
+             //
+
+
         }
 
 
@@ -687,7 +720,9 @@ void DialGen::SlotKeyReturn()
 
                              // Доделать Вывод типа поля
 
-                             // qDebug()<<tCurrentRowInfo  <<" " << ModelProj->GetField_Type(tCurrentRowInfo);
+                             //qDebug()<<tCurrentRowInfo  <<" " << ModelProj->GetField_Type(tCurrentRowInfo);
+
+                           // qDebug()<<"tCurrentRowInfo "<<tCurrentRowInfo;
 
                             //----------------------------------
 
@@ -706,7 +741,7 @@ void DialGen::SlotKeyReturn()
 
                     }
 
-   }
+     }
 
 
 //Режим просмотра
@@ -798,6 +833,8 @@ void DialGen::SlotKeyNewDoc()
         for(int k=2;k<TableViewInfo->model()->rowCount(QModelIndex());k++)
         {
            TableViewInfo->setRowHidden(k, true);
+
+           //qDebug()<<"k "<<k;
         }
 
 
@@ -936,57 +973,53 @@ if (flagNewView == 1 )
 void DialGen::SlotKeyDown()
 {
 
-    tStorage->SetCachCurrentCount(tCurrentRowInfo);
-    lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
 
 if (flagNewView == 1 )
 
 {
 
     flagChangeSlot = true;
+/*
+if (tCurrentRowInfo == 3)
+    {}
+ */
+        //QModelIndex  tMIndex2 = lListViewCache.at(tCurrentRowInfo)->model()->index(1,0, QModelIndex());
+        tStorage->SetCachCurrentCountData(tCurrentRowInfo);
+        lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
+
+        //qDebug()<<"StakeGenSubCache "<<StakeGenSubCache->currentIndex();
+        //qDebug()<<"lListViewCache "<<lListViewCache.at(tCurrentRowInfo)->model()->data(tMIndex2, Qt::DisplayRole).toString();
 
 //Определяет выделение строки
     QModelIndex  tMIndexCurrent =  lListViewCache.at(tCurrentRowInfo)->selectionModel()->currentIndex();
+    QModelIndex  tMIndex;
 
     int ddd = tMIndexCurrent.row();
 
-//qDebug()<<"ddd="<<ddd;
-//qDebug()<<"tCurrentRowInfo="<<tCurrentRowInfo;
-
-
     if (ddd < 0)
-    {
 
-        QModelIndex  tMIndex = lListViewCache.at(tCurrentRowInfo)->model()->index(0,0, QModelIndex());
+        tMIndex  = lListViewCache.at(tCurrentRowInfo)->model()->index(0,0, QModelIndex());
 
-        lListViewCache.at(tCurrentRowInfo)->selectionModel()->clearSelection();
-        lListViewCache.at(tCurrentRowInfo)->selectionModel()->setCurrentIndex(tMIndex, QItemSelectionModel::Select);
+     else
 
-        listTextEdit.at(tCurrentRowInfo)->setText(lListViewCache.at(tCurrentRowInfo)->model()->data(tMIndex, Qt::DisplayRole).toString());
-        listTextEdit.at(tCurrentRowInfo)->selectAll();
+       tMIndex = lListViewCache.at(tCurrentRowInfo)->model()->index(ddd + 1,0, QModelIndex());
 
-        CurrentData = lListViewCache.at(tCurrentRowInfo)->model()->data(tMIndex, Qt::DisplayRole).toString();
 
-    }
+    lListViewCache.at(tCurrentRowInfo)->selectionModel()->clearSelection();
+    lListViewCache.at(tCurrentRowInfo)->selectionModel()->setCurrentIndex(tMIndex, QItemSelectionModel::Select);
 
-    else
-    {
-
-       QModelIndex  tMIndex = lListViewCache.at(tCurrentRowInfo)->model()->index(ddd + 1,0, QModelIndex());
-
-       lListViewCache.at(tCurrentRowInfo)->selectionModel()->clearSelection();
-       lListViewCache.at(tCurrentRowInfo)->selectionModel()->setCurrentIndex(tMIndex, QItemSelectionModel::Select);
-
-       listTextEdit.at(tCurrentRowInfo)->setText(lListViewCache.at(tCurrentRowInfo)->model()->data(tMIndex, Qt::DisplayRole).toString());
-       listTextEdit.at(tCurrentRowInfo)->selectAll();
-       CurrentData = lListViewCache.at(tCurrentRowInfo)->model()->data(tMIndex, Qt::DisplayRole).toString();
+    listTextEdit.at(tCurrentRowInfo)->setText(lListViewCache.at(tCurrentRowInfo)->model()->data(tMIndex, Qt::DisplayRole).toString());
+    listTextEdit.at(tCurrentRowInfo)->selectAll();
 
 
 
- //-------------------------------------------------------------------------------
 
-    }
+    // CurrentData = lListViewCache.at(tCurrentRowInfo)->model()->data(tMIndex, Qt::DisplayRole).toString();
+
+
+//-------------------------------------------------------------------------------
      flagChangeSlot = false;
+
 
 }
 
@@ -1160,7 +1193,7 @@ void DialGen::SlotChangedText()
 
     }
 
-
+//qDebug()<<"tCurrentRowInfo"<<tCurrentRowInfo;
 
 }
 
