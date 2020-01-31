@@ -62,16 +62,15 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
                  ModelUni *ModelCache = new ModelUni(CACHE, tStorage);
                  QListView *tListCache = new QListView(); // Представление в виде списка
 
-
-
                 // QModelIndex tttt = ModelCache->index(1,0, QModelIndex());
                 // qDebug()<<"data "<< ModelCache->data(tttt, Qt::DisplayRole).toString();
 
                  tListCache->setModel(ModelCache);
 
-
                  lModelCach << ModelCache;
                  lListViewCache << tListCache;
+
+
                }
 
 //-----------------------------------------------------------
@@ -152,6 +151,10 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
                StakeGenSubCashSub->addWidget(lListViewCache.at(i));
                StakeGenSubCache->addWidget(StakeGenSubCashSub);
 
+               //qDebug()<<lListViewCache.at(i);
+               //qDebug()<<StakeGenSubCashSub;
+
+
 
              //------Temp
 
@@ -217,6 +220,12 @@ DialGen::DialGen(StorProject *StPr, QWidget *parent)
                                                                         */
 
             }
+
+
+
+            //Temp
+             //QObjectList lObjL = StakeGenSubCache->currentWidget()->children();
+             //qDebug()<<"lObjL "<<lObjL;
 
 
 // Установка моделей в Info
@@ -474,10 +483,28 @@ void DialGen::SlotCurrentChangedInfo(const QItemSelection & selected)
     {
    listTextEdit.at(tCurrentRowInfo)->setFocus();
    listTextEdit.at(tCurrentRowInfo)->selectAll();
+
+
+   if (flagNewView == 1 )
+        {
+            tStorage->SetCachCurrentCountData(tCurrentRowInfo);
+            lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
+
+           // QObjectList lObjLtemp = StakeGenSubCache->currentWidget()->children();
+           // QListView* LV = qobject_cast<QListView*>(lObjLtemp.at(1));
+           // qDebug()<<LV->model()->index(0, 0, QModelIndex()).data(Qt::DisplayRole);
+
+
+            //qDebug()<<"tCurrentRowInfo3 "<< tCurrentRowInfo;
+            //qDebug()<<"StakeGenSubCache "<<StakeGenSubCache->currentIndex();
+           // qDebug()<<"StakeGenSubCacheWidget "<<StakeGenSubCache->currentWidget();
+           // qDebug()<<"lListViewCache "<<lListViewCache.at(tCurrentRowInfo);
+        }
+
     }
 
 
-       //qDebug()<<"SlotCurrentChangedInfo"<< tCurrentRowInfo;
+
 
 }
 
@@ -646,6 +673,10 @@ void DialGen::SlotKeyReturn()
 
     if (flagNewView == 1 ) //режим нового документа
     {
+
+        //qDebug()<<"SlotKeyReturn "<<tCurrentRowInfo;
+        //tStorage->SetCachCurrentCountData(tCurrentRowInfo);
+        //lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
 
         TextSearch.clear();
         countSearch = 0;
@@ -979,13 +1010,41 @@ if (flagNewView == 1 )
 {
 
     flagChangeSlot = true;
-/*
-if (tCurrentRowInfo == 3)
-    {}
- */
+
+
+    //Temp
+
+  //  QStackedWidget *StakeGenSubCashSub = new QStackedWidget;
+  //  StakeGenSubCashSub->addWidget(lListViewCache.at(tCurrentRowInfo));
+
+
+  //  tStorage->SetCachCurrentCountData(tCurrentRowInfo);
+   // QObjectList lObjLtemp = StakeGenSubCache->currentWidget()->children();
+   // QObjectList lObjLtemp2 = StakeGenSubCache->children();
+
+
+   // QStackedWidget* SV = qobject_cast<QStackedWidget*>(lObjLtemp.at(0));
+   // QListView* LV = qobject_cast<QListView*>(lObjLtemp.at(1));
+
+
+
+  // qDebug()<<lModelCach.at(tCurrentRowInfo)->index(0, 0, QModelIndex()).data(Qt::DisplayRole);
+
+  //qDebug()<<LV->model()->index(0, 0, QModelIndex()).data(Qt::DisplayRole);
+
+  //qDebug()<<lObjLtemp;
+  //qDebug()<<lObjLtemp2;
+
+  //qDebug()<<SV;
+
+
+
+    //QListView LVTemp = <QListView>lObjLtemp.at(1);
+    //qDebug()<<"LVTemp "<<LVTemp;
+
         //QModelIndex  tMIndex2 = lListViewCache.at(tCurrentRowInfo)->model()->index(1,0, QModelIndex());
-        tStorage->SetCachCurrentCountData(tCurrentRowInfo);
-        lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
+        //tStorage->SetCachCurrentCountData(tCurrentRowInfo);
+        //lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
 
         //qDebug()<<"StakeGenSubCache "<<StakeGenSubCache->currentIndex();
         //qDebug()<<"lListViewCache "<<lListViewCache.at(tCurrentRowInfo)->model()->data(tMIndex2, Qt::DisplayRole).toString();

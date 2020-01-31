@@ -445,8 +445,10 @@ void StorProject::SetCachCurrentCountData(int i)
  CachCurrentCount = lDataCachCount.value(i);
  CachCurrentData = l_vv_Cache.value(i);
 
- qDebug()<<"i "<<i;
- qDebug()<<"l_vv_Cache.value "<<l_vv_Cache.value(i);
+ //qDebug()<<"i "<<i;
+ //qDebug()<<"l_vv_Cache.value "<<l_vv_Cache.value(i);
+
+ //qDebug()<<"l_vv_Cache.value+1 "<<l_vv_Cache.value(i + 1);
  //qDebug()<<"CachCurrentData "<<CachCurrentData;
 
    //qDebug()<<"lDataCachCount "<<lDataCachCount;

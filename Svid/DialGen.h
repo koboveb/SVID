@@ -17,6 +17,7 @@
 #include <QKeyEvent>
 
 #include <QStackedWidget>
+
 #include <QCalendarWidget>
 
 //#include <QHeaderView> //Временно
