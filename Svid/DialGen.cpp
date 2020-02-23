@@ -488,7 +488,8 @@ void DialGen::SlotCurrentChangedInfo(const QItemSelection & selected)
    if (flagNewView == 1 )
         {
             tStorage->SetCachCurrentCountData(tCurrentRowInfo);
-            lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
+            //lListViewCache.at(tCurrentRowInfo)->update(QModelIndex());
+            lListViewCache.at(tCurrentRowInfo)->reset();
 
            // QObjectList lObjLtemp = StakeGenSubCache->currentWidget()->children();
            // QListView* LV = qobject_cast<QListView*>(lObjLtemp.at(1));
@@ -705,13 +706,18 @@ void DialGen::SlotKeyReturn()
 
             QString ttText = listTextEdit.at(tCurrentRowInfo)->toPlainText();
             tStorage->SetDocumNameLevel(ttText);
-            lListViewCache.value(1)->update(QModelIndex());
+
+           lListViewCache.value(1)->reset();
+
+           // lListViewCache.value(1)->update(QModelIndex());
+
         }
 
 
         if (tCurrentRowInfo == 1)
 
         {
+
 
              lfShow = tStorage->GetFieldDocumForShow(listTextEdit.at(tCurrentRowInfo)->toPlainText());
 
